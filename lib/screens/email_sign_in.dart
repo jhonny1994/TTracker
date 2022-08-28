@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:ttracker/services/auth.dart';
+import 'package:provider/provider.dart';
+import 'package:ttracker/services/auth_provider.dart';
 
 class EmailSignIn extends StatefulWidget {
   const EmailSignIn({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _EmailSignInState extends State<EmailSignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     bool submitEnabled = _email.text.isNotEmpty & _password.text.isNotEmpty;
     final primaryText = isSignIn ? 'Sign in' : 'Sign up';
     final secondaryText = isSignIn ? 'Need an account ?' : 'Have an account ?';
@@ -77,13 +79,13 @@ class _EmailSignInState extends State<EmailSignIn> {
                                   ? currentFocus.unfocus()
                                   : context.loaderOverlay.show();
                               isSignIn
-                                  ? await Auth()
+                                  ? await authService
                                       .signInWithEmailAndPassword(
                                           _email.text.trim(),
                                           _password.text.trim())
                                       .then((value) =>
                                           Navigator.of(context).pop())
-                                  : await Auth()
+                                  : await authService
                                       .createUserWithEmailAndPassword(
                                           _email.text.trim(),
                                           _password.text.trim())

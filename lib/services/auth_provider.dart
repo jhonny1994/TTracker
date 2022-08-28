@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Auth {
-  final _firebaseAuth = FirebaseAuth.instance;
-
+class AuthService {
   User? get currentUser => _firebaseAuth.currentUser;
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
 
@@ -30,12 +30,10 @@ class Auth {
 
   Future<User?> signInWithFacebook() async {
     final fb = FacebookLogin();
-
     final res = await fb.logIn(permissions: [
       FacebookPermission.publicProfile,
       FacebookPermission.email,
     ]);
-
     switch (res.status) {
       case FacebookLoginStatus.success:
         final accessToken = res.accessToken;

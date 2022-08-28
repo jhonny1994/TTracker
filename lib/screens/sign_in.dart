@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 import 'package:ttracker/screens/email_sign_in.dart';
-import 'package:ttracker/services/auth.dart';
+import 'package:ttracker/services/auth_provider.dart';
 import 'package:ttracker/widgets/social_button.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -9,6 +10,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     ToastContext().init(context);
     return Scaffold(
       body: Padding(
@@ -32,14 +34,14 @@ class SignInScreen extends StatelessWidget {
             SocialButton(
                 text: 'Sign in with Google',
                 onPressed: () {
-                  Auth().signInWithGoogle();
+                  authService.signInWithGoogle();
                 },
                 backgroundColor: const Color(0xffDB4437)),
             const SizedBox(height: 10),
             SocialButton(
                 text: 'Sign in with Facebook',
                 onPressed: () {
-                  Auth().signInWithFacebook();
+                  authService.signInWithFacebook();
                 },
                 backgroundColor: const Color(0xff4267B2)),
             const SizedBox(height: 10),
@@ -58,7 +60,7 @@ class SignInScreen extends StatelessWidget {
             SocialButton(
                 text: 'Sign in Anonymously',
                 onPressed: () {
-                  Auth().signInAnonymously();
+                  authService.signInAnonymously();
                 },
                 backgroundColor: Colors.lime),
             const Spacer(),

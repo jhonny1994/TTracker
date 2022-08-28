@@ -40,6 +40,9 @@ dependencies:
   google_sign_in: ^5.4.1
   flutter_login_facebook: ^1.6.0
   loader_overlay: ^2.0.10
+  quickalert: ^0.0.2
+  provider: ^6.0.3
+  cloud_firestore: ^3.4.6
 
 dev_dependencies:
   flutter_test:
