@@ -4,14 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:ttracker/firebase_options.dart';
 import 'package:ttracker/screens/wrapper.dart';
 import 'package:ttracker/services/auth_provider.dart';
-import 'package:wakelock/wakelock.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Wakelock.enable();
   runApp(const MainWidget());
 }
 
