@@ -11,20 +11,25 @@ class EmailSignIn extends StatefulWidget {
 }
 
 class _EmailSignInState extends State<EmailSignIn> {
+  bool isSignIn = true;
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
-  bool isSignIn = true;
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
+    final authService = Provider.of<AuthBase>(context);
     bool submitEnabled = _email.text.isNotEmpty & _password.text.isNotEmpty;
     final primaryText = isSignIn ? 'Sign in' : 'Sign up';
     final secondaryText = isSignIn ? 'Need an account ?' : 'Have an account ?';
     final thirdText = isSignIn ? 'Sign up' : 'Sign in';
     return LoaderOverlay(
       child: Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          title: const Text('TTracker'),
+          centerTitle: true,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Center(
